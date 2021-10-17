@@ -1,7 +1,33 @@
 import React, { Component } from 'react';
+
 class Event extends Component {
+  state = {
+    isExpanded: false
+  }
+
+  handleEventExpand = () => {
+    this.setState({
+      isExpanded: !this.state.isExpanded
+    });
+  }
+
   render() {
-    return <div></div>;
+    const { event } = this.props;
+    const { isExpanded } = this.state;
+    
+    return (
+      <div className="Event">
+        {event.description !== undefined
+          ? (
+            <React.Fragment>
+              <div className={`details ${isExpanded ? 'is-active': ''}`}>{event.description}</div>
+              <button type="button" className="details-btn" onClick={this.handleEventExpand}>Details</button>
+            </React.Fragment>
+          )
+          : ''
+        }
+      </div>
+    );
   }
 }
 
