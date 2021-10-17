@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import NumberOfEvents from '../NumberOfEvents';
 
 describe('<App /> Component', () => {
   let AppWrapper;
@@ -16,5 +17,9 @@ describe('<App /> Component', () => {
 
   test('render CitySearch', () => {
     expect(AppWrapper.find(CitySearch)).toHaveLength(1);
+  });
+
+  test('render NumberofEvents', () => {
+    expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
   });
 });
