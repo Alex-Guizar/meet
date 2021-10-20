@@ -6,6 +6,8 @@ import NumberOfEvents from './NumberOfEvents';
 import { mockData } from './mock-data';
 import { extractLocations, getEvents } from './api';
 
+import './nprogress.css';
+
 class App extends Component {
   state = {
     events: [],
