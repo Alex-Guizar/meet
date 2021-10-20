@@ -1,3 +1,5 @@
+import { mockData } from './mock-data';
+
 /**
  * @param {*} events:
  * The following function should be in the "api.js" file.
@@ -9,4 +11,14 @@ export const extractLocations = (events) => {
   var extractLocations = events.map((event) => event.location);
   var locations = [...new Set(extractLocations)];
   return locations;
+}
+
+/**
+ * 
+ * @returns {*}:
+ * The following function should be in the "api.js" file.
+ * This function returns event data asynchronously.
+ */
+export const getEvents = async () => {
+  return mockData;
 }
