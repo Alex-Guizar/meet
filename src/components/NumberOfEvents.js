@@ -10,19 +10,18 @@ class NumberOfEvents extends Component {
     this.setState({
       eventNumber: value
     });
+    this.props.updateEvents(undefined, value);
   }
 
   render() {
-    const { eventNumber } = this.state;
-    
     return (
       <div className="NumberOfEvents">
         <input 
           className="event-number" 
           type="number" 
           name="event-number" 
-          value={eventNumber} 
-          onChange={this.handleInputChange}
+          value={this.state.eventNumber} 
+          onChange={(event) => this.handleInputChange(event)}
         />
       </div>
     );

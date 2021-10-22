@@ -16,8 +16,6 @@ class CitySearch extends Component {
       query: value,
       suggestions
     });
-
-
   }
 
   handleItemClicked = (suggestion) => {

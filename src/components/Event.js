@@ -20,6 +20,7 @@ class Event extends Component {
         {event.description !== undefined
           ? (
             <React.Fragment>
+              <div className="Event-title">{event.summary}</div>
               <div className={`details ${isExpanded ? 'is-active': ''}`}>{event.description}</div>
               <button type="button" className="details-btn" onClick={this.handleEventExpand}>Details</button>
             </React.Fragment>
