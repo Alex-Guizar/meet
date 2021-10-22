@@ -60,7 +60,7 @@ const removeQuery = () => {
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    'https://zkabbm23wj.execute-api.us-west-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+    `https://zkabbm23wj.execute-api.us-west-1.amazonaws.com/dev/api/token/${encodeCode}`
   )
     .then((res) => res.json())
     .catch((error) => error);
@@ -87,7 +87,7 @@ export const getEvents = async () => {
   const token = await getAccessToken();
   if (token) {
     removeQuery();
-    const url = 'https://zkabbm23wj.execute-api.us-west-1.amazonaws.com/dev/api/get-events' + '/' + token;
+    const url = `https://zkabbm23wj.execute-api.us-west-1.amazonaws.com/dev/api/get-events/${token}`;
     const result = await axios.get(url);
     
     if (result.data) {

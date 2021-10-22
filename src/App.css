@@ -1,3 +1,7 @@
+.app {
+  padding-bottom: 3rem;
+}
+
 .city-search {
   position: relative;
 }
