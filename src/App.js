@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import './App.css';
-import EventList from './EventList';
-import CitySearch from './CitySearch';
-import NumberOfEvents from './NumberOfEvents';
-import { mockData } from './mock-data';
+
+import EventList from './components/EventList';
+import CitySearch from './components/CitySearch';
+import NumberOfEvents from './components/NumberOfEvents';
 import { extractLocations, getEvents } from './api';
 
+import './App.css';
 import './nprogress.css';
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
-    eventNumber: 32,
-    data: mockData
+    numberOfEvents: 32,
+    currentLocation: 'all'
   }
 
   componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
+      const reducedEvents = events.slice(0, this.state.numberOfEvents);
       if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
+        this.setState({ events: reducedEvents, locations: extractLocations(reducedEvents) });
       }
     });
   }
@@ -29,13 +30,20 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventCount) => {
+    const currentLocation = (location !== undefined) ? location: this.state.currentLocation;
+    const eventNumber = (eventCount !== undefined) ? eventCount : this.state.numberOfEvents;
+
     getEvents().then((events) => {
-      const locationEvents = (location === 'all') ?
+      let locationEvents = (currentLocation === 'all') ?
         events :
-        events.filter((event) => event.location === location);
+        events.filter((event) => event.location === currentLocation);
+      locationEvents = locationEvents.slice(0, eventNumber);
+      
       this.setState({
-        events: locationEvents
+        events: locationEvents,
+        numberOfEvents: eventNumber,
+        currentLocation
       });
     });
   }
@@ -47,12 +55,12 @@ class App extends Component {
   // } 
 
   render() {
-    const { events, locations, eventNumber, data } = this.state;
+    const { events, locations } = this.state;
 
     return (
       <div className="App">
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents data={data.slice(0, eventNumber)} />
+        <NumberOfEvents updateEvents={this.updateEvents} />
         <EventList events={events} />
       </div>
     );
