@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from '../App';
-import EventList from '../EventList';
-import CitySearch from '../CitySearch';
-import NumberOfEvents from '../NumberOfEvents';
+import EventList from '../components/EventList';
+import CitySearch from '../components/CitySearch';
+import NumberOfEvents from '../components/NumberOfEvents';
 
 import { mockData } from '../mock-data';
 import { extractLocations, getEvents } from '../api';
@@ -62,9 +62,38 @@ describe('<App /> integration', () => {
   test('get list of all events when user selects "See all cities"', async () => {
     const AppWrapper = mount(<App />);
     const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
-    await suggestionItems.at(suggestionItems.length -1).simulate('click');
-    const allEvents = await getEvents();
+
+    suggestionItems.at(suggestionItems.length -1).simulate('click');
+    let allEvents = await getEvents();
+    // reduce `allEvents` by default shown events: 32
+    allEvents = allEvents.slice(0, 32);
     expect(AppWrapper.state('events')).toEqual(allEvents);
+    AppWrapper.unmount();
+  });
+
+  test('get a list of the default amount of events', async () => {
+    const AppWrapper = mount(<App />);
+    const defaultNumber = 32;
+    const allEvents = await getEvents();
+    AppWrapper.setState({
+      events: allEvents.slice(0, defaultNumber),
+      numberOfEvents: defaultNumber
+    });
+    const totalEvents = AppWrapper.find(EventList).find('.EventList li').length;
+    expect(totalEvents).toBeLessThanOrEqual(AppWrapper.state('numberOfEvents'));
+    AppWrapper.unmount();
+  });
+
+  test('get a list of specified amount of events when user changes the number of events input', async () => {
+    const AppWrapper = mount(<App />);
+    const eventObject = { target: { value: 16 }};
+
+    AppWrapper.find(NumberOfEvents).find('.event-number').simulate('change', eventObject);
+    let allEvents = await getEvents();
+    allEvents = allEvents.slice(0, AppWrapper.state('numberOfEvents'))
+
+    const totalEvents = allEvents.length;
+    expect(totalEvents).toBeLessThanOrEqual(AppWrapper.state('numberOfEvents'));
     AppWrapper.unmount();
   });
 });
