@@ -1,4 +1,9 @@
+// Packages
 import React, { Component } from 'react';
+
+// React-Bootstrap Component
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 class Event extends Component {
   state = {
@@ -16,18 +21,24 @@ class Event extends Component {
     const { isExpanded } = this.state;
     
     return (
-      <div className="Event">
+      <Card className="event">
         {event.description !== undefined
           ? (
-            <React.Fragment>
-              <div className="Event-title">{event.summary}</div>
-              <div className={`details ${isExpanded ? 'is-active': ''}`}>{event.description}</div>
-              <button type="button" className="details-btn" onClick={this.handleEventExpand}>Details</button>
-            </React.Fragment>
+            <Card.Body>
+              <Card.Title className="Event-title">{event.summary}</Card.Title>
+
+              <Card.Text className={`details ${isExpanded ? 'is-active': ''}`}>{event.description}</Card.Text>
+
+              <Button 
+                variant="primary"
+                className="details-btn"
+                onClick={this.handleEventExpand}
+              >Details</Button>
+            </Card.Body>
           )
           : ''
         }
-      </div>
+      </Card>
     );
   }
 }

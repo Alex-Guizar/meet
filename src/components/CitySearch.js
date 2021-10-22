@@ -1,4 +1,10 @@
+// Packages
 import React, { Component } from 'react';
+
+// React-Bootstrap Components
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class CitySearch extends Component {
   state = {
@@ -29,28 +35,40 @@ class CitySearch extends Component {
 
   render() {
     return (
-      <div className="CitySearch">
-        <input
-          type="text"
-          className="city"
-          value={this.state.query}
-          onChange={this.handleInputChanged}
-          onFocus={() => { this.setState({ showSuggestions: true }) }}
-        />
-        <ul className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }}>
+      <div className="city-search">
+        <>
+          <FloatingLabel 
+            controlId="city-input"
+            label="City"
+            className="mt-3"
+          >
+            <Form.Control 
+              type="text" 
+              placholder="City" 
+              className="city"
+              name="city"
+              value={this.state.query}
+              onChange={this.handleInputChanged}
+              onFocus={() => { this.setState({ showSuggestions: true })}}
+             
+            />
+          </FloatingLabel>
+        </>
+        <ListGroup
+          className="suggestions"
+          style={this.state.showSuggestions ? {} : { display: 'none'}}
+        >
           {this.state.suggestions.map((suggestion) => (
-            <li
+            <ListGroup.Item
               key={suggestion}
               onClick={() => this.handleItemClicked(suggestion)}
-            >{suggestion}</li>
+            >{suggestion}</ListGroup.Item>
           ))}
-          <li 
+          <ListGroup.Item
             key="all"
             onClick={() => this.handleItemClicked('all')}
-          >
-            <b>See all cities</b>
-          </li>
-        </ul>
+          ><b>See All Cities</b></ListGroup.Item>
+        </ListGroup>
       </div>
     );
   }

@@ -1,10 +1,17 @@
+// Packages
 import React, { Component } from 'react';
 
+// React-Bootstrap Components
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+
+// Custom Components
 import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import { extractLocations, getEvents } from './api';
 
+// Custom CSS
 import './App.css';
 import './nprogress.css';
 
@@ -58,10 +65,20 @@ class App extends Component {
     const { events, locations } = this.state;
 
     return (
-      <div className="App">
-        <CitySearch locations={locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateEvents={this.updateEvents} />
-        <EventList events={events} />
+      <div className="app">
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand>Meet</Navbar.Brand>
+          </Container>
+        </Navbar>
+        <Container>
+          <CitySearch locations={locations} updateEvents={this.updateEvents} />
+          <div className="event-header">
+            <h1 className="event-header__heading">Events</h1>
+            <NumberOfEvents updateEvents={this.updateEvents} />
+          </div>
+          <EventList events={events} />
+        </Container>
       </div>
     );
   }

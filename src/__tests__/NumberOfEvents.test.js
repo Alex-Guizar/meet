@@ -9,7 +9,7 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('render number of events input', () => {
-    expect(NumberWrapper.find('.event-number')).toHaveLength(1);
+    expect(NumberWrapper.find('.event-number__input')).toHaveLength(1);
   });
 
   test('render 32 events when not specified by user', () => {
@@ -18,7 +18,7 @@ describe('<NumberOfEvents /> component', () => {
 
   test('change event number when number input is changed', () => {
     const eventObject = { target: { value: 15 }};
-    NumberWrapper.find('.event-number').simulate('change', eventObject);
+    NumberWrapper.find('.event-number__input').simulate('change', eventObject);
     expect(NumberWrapper.state('eventNumber')).toBe(15);
   });
 });

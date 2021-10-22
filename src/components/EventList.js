@@ -1,5 +1,11 @@
+// Packages
 import React, { Component } from 'react';
 
+// React-Bootstrap Component
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+// Custom Component
 import Event from './Event';
 
 class EventList extends Component {
@@ -7,13 +13,17 @@ class EventList extends Component {
     const { events } = this.props;
 
     return (
-      <ul className="EventList">
+      <Row className="event-list">
         {events.map(event => 
-          <li key={event.id}>
+          <Col 
+            xs={12} sm={6} lg={4}
+            key={event.id}
+            className="event-list__col"
+          >
             <Event event={event} />
-          </li>  
+          </Col>  
         )}
-      </ul>
+      </Row>
     );
   }
 }

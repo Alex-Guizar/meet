@@ -1,4 +1,9 @@
+// Packages
 import React, { Component } from 'react';
+
+// React-Bootstrap Components
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 class NumberOfEvents extends Component {
   state = {
@@ -15,14 +20,20 @@ class NumberOfEvents extends Component {
 
   render() {
     return (
-      <div className="NumberOfEvents">
-        <input 
-          className="event-number" 
-          type="number" 
-          name="event-number" 
-          value={this.state.eventNumber} 
-          onChange={(event) => this.handleInputChange(event)}
-        />
+      <div className="event-number ml-auto">
+        <FloatingLabel
+          controlId="ev-num-input"
+          label="Displayed Events"
+          className=""
+        >
+          <Form.Control
+            className="event-number__input"
+            type="number"
+            name="event-number"
+            value={this.state.eventNumber}
+            onChange={(event) => this.handleInputChange(event)}
+          />
+        </FloatingLabel>
       </div>
     );
   }
