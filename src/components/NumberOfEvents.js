@@ -24,7 +24,7 @@ class NumberOfEvents extends Component {
         <FloatingLabel
           controlId="ev-num-input"
           label="Displayed Events"
-          className=""
+          className="event-number__label"
         >
           <Form.Control
             className="event-number__input"

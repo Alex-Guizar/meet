@@ -36,9 +36,9 @@ describe('<CitySearch /> component', () => {
   test('render list of suggestions correctly', () => {
     CitySearchWrapper.setState({ suggestions: locations });
     const suggestions = CitySearchWrapper.state('suggestions');
-    expect(CitySearchWrapper.find('.suggestions .list-group-item')).toHaveLength(suggestions.length + 1);
+    expect(CitySearchWrapper.find('.suggestions-item')).toHaveLength(suggestions.length + 1);
     for (let i = 0; i < suggestions.length; i += 1) {
-      expect(CitySearchWrapper.find('.suggestions .list-group-item').at(i).text()).toBe(suggestions[i]);
+      expect(CitySearchWrapper.find('.suggestions-item').at(i).text()).toBe(suggestions[i]);
     }
   });
 
@@ -59,7 +59,7 @@ describe('<CitySearch /> component', () => {
       query: 'Berlin'
     });
     const suggestions = CitySearchWrapper.state('suggestions');
-    CitySearchWrapper.find('.suggestions .list-group-item').at(0).simulate('click');
+    CitySearchWrapper.find('.suggestions-item').at(0).simulate('click');
     expect(CitySearchWrapper.state('query')).toBe(suggestions[0]);
   });
 
@@ -74,7 +74,7 @@ describe('<CitySearch /> component', () => {
       query: 'Berlin',
       showSuggestions: undefined
     });
-    CitySearchWrapper.find('.suggestions .list-group-item').at(0).simulate('click');
+    CitySearchWrapper.find('.suggestions-item').at(0).simulate('click');
     expect(CitySearchWrapper.state('showSuggestions')).toBe(false);
     expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({ display: 'none' });
   });

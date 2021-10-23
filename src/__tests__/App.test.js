@@ -61,7 +61,7 @@ describe('<App /> integration', () => {
 
   test('get list of all events when user selects "See all cities"', async () => {
     const AppWrapper = mount(<App />);
-    const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions .list-group-item');
+    const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions-item');
 
     suggestionItems.at(suggestionItems.length -1).simulate('click');
     let allEvents = await getEvents();
@@ -88,7 +88,7 @@ describe('<App /> integration', () => {
     const AppWrapper = mount(<App />);
     const eventObject = { target: { value: 16 }};
 
-    AppWrapper.find(NumberOfEvents).find('.event-number__input').simulate('change', eventObject);
+    AppWrapper.find(NumberOfEvents).find('.event-number__input').hostNodes().simulate('change', eventObject);
     let allEvents = await getEvents();
     allEvents = allEvents.slice(0, AppWrapper.state('numberOfEvents'))
 

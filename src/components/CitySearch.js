@@ -62,11 +62,13 @@ class CitySearch extends Component {
             <ListGroup.Item
               key={suggestion}
               onClick={() => this.handleItemClicked(suggestion)}
+              className="suggestions-item"
             >{suggestion}</ListGroup.Item>
           ))}
           <ListGroup.Item
             key="all"
             onClick={() => this.handleItemClicked('all')}
+            className="suggestions-item"
           ><b>See All Cities</b></ListGroup.Item>
         </ListGroup>
       </div>
