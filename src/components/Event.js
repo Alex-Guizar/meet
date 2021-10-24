@@ -25,7 +25,7 @@ class Event extends Component {
         {event.description !== undefined
           ? (
             <Card.Body>
-              <Card.Title className="Event-title">{event.summary}</Card.Title>
+              <Card.Title className="event-title">{event.summary}</Card.Title>
 
               <Card.Text className={`details ${isExpanded ? 'is-active': ''}`}>{event.description}</Card.Text>
 
