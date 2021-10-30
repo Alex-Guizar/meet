@@ -47,7 +47,9 @@ class NumberOfEvents extends Component {
             onChange={(event) => this.handleInputChange(event)}
           />
         </FloatingLabel>
-        <ErrorAlert text={this.state.errorText} />
+        <div className="py-2">
+          <ErrorAlert text={this.state.errorText} />
+        </div>
       </div>
     );
   }

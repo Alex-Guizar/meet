@@ -49,7 +49,9 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="city-search">
-        <InfoAlert text={this.state.infoText} />
+        <div className="py-2">
+          <InfoAlert text={this.state.infoText} />
+        </div>
         <>
           <FloatingLabel 
             controlId="city-input"

@@ -2,6 +2,12 @@
   min-height: 48px;
 }
 
+.event-title__date {
+  font-size: .85rem;
+  font-weight: 400;
+  float: right;
+}
+
 .app {
   padding-bottom: 3rem;
 }
