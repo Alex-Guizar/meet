@@ -33,7 +33,6 @@ class Event extends Component {
     const { isExpanded } = this.state;
     const eventDate = this.convertDate(new Date(event.start.dateTime));
     const currentDate = this.convertDate(new Date());
-    console.log(currentDate);
     
     return (
       <Card className="event">
