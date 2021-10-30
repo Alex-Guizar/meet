@@ -6,11 +6,15 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+// Custom Components
+import { InfoAlert } from './Alert';
+
 class CitySearch extends Component {
   state = {
     query: '',
     suggestions: [],
-    showSuggestions: undefined
+    showSuggestions: undefined,
+    infoText: ''
   }
 
   handleInputChanged = (event) => {
@@ -18,10 +22,19 @@ class CitySearch extends Component {
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
-    this.setState({
-      query: value,
-      suggestions
-    });
+
+    if (suggestions.length === 0) {
+      this.setState({
+        query: value,
+        infoText: 'We can not find the city you are looking for. Please try another city'
+      });
+    } else {
+      this.setState({
+        query: value,
+        suggestions,
+        infoText: ''
+      });
+    }
   }
 
   handleItemClicked = (suggestion) => {
@@ -36,11 +49,12 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="city-search">
+        <InfoAlert text={this.state.infoText} />
         <>
           <FloatingLabel 
             controlId="city-input"
             label="City"
-            className="mt-3"
+            className=""
           >
             <Form.Control 
               type="text" 

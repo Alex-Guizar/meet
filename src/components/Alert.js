@@ -14,8 +14,8 @@ class Alert extends Component {
 
   render() {
     return (
-      <div className="alert">
-        <p style={this.getStyle()}>{this.props.text}</p>
+      <div className="alert mb-0">
+        <p className="mb-0 alert-inner" style={this.getStyle()}>{this.props.text}</p>
       </div>
     );
   }
