@@ -74,7 +74,7 @@ class App extends Component {
         <Container>
           <CitySearch locations={locations} updateEvents={this.updateEvents} />
           <div className="event-header">
-            <h1 className="event-header__heading">Events</h1>
+            <h1 className="event-header__heading me-3">Events</h1>
             <NumberOfEvents updateEvents={this.updateEvents} />
           </div>
           <EventList events={events} />

@@ -5,16 +5,29 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
+// Custom Components
+import { ErrorAlert } from './Alert';
+
 class NumberOfEvents extends Component {
   state = {
-    eventNumber: 32
+    eventNumber: 32,
+    errorText: ''
   }
 
   handleInputChange = (event) => {
     const value = event.target.value;
-    this.setState({
-      eventNumber: value
-    });
+
+    if (parseInt(value) < 1 || parseInt(value) > 32) {
+      this.setState({
+        eventNumber: 32,
+        errorText: 'Select number from 1 to 32'
+      });
+    } else {
+      this.setState({
+        eventNumber: value,
+        errorText: ''
+      });
+    }
     this.props.updateEvents(undefined, value);
   }
 
@@ -34,6 +47,7 @@ class NumberOfEvents extends Component {
             onChange={(event) => this.handleInputChange(event)}
           />
         </FloatingLabel>
+        <ErrorAlert text={this.state.errorText} />
       </div>
     );
   }
