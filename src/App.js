@@ -10,6 +10,7 @@ import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import { extractLocations, getEvents } from './api';
+import { WarningAlert } from './components/Alert';
 
 // Custom CSS
 import './nprogress.css';
@@ -72,6 +73,10 @@ class App extends Component {
           </Container>
         </Navbar>
         <Container>
+          {!navigator.onLine ?
+            <WarningAlert text="Current information is being loaded from the cache." /> :
+            ''
+          }
           <CitySearch locations={locations} updateEvents={this.updateEvents} />
           <div className="event-header">
             <h1 className="event-header__heading me-3">Events</h1>
