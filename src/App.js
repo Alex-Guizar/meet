@@ -9,7 +9,8 @@ import Container from 'react-bootstrap/Container';
 import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
-import { extractLocations, getEvents } from './api';
+import WelcomeScreen from '.WelcomeScreen';
+import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { WarningAlert } from './components/Alert';
 
 // Custom CSS
@@ -21,17 +22,26 @@ class App extends Component {
     events: [],
     locations: [],
     numberOfEvents: 32,
-    currentLocation: 'all'
+    currentLocation: 'all',
+    showWelcomeScreen: undefined
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      const reducedEvents = events.slice(0, this.state.numberOfEvents);
-      if (this.mounted) {
-        this.setState({ events: reducedEvents, locations: extractLocations(reducedEvents) });
-      }
-    });
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        const reducedEvents = events.slice(0, this.state.numberOfEvents);
+        if (this.mounted) {
+          this.setState({ events: reducedEvents, locations: extractLocations(reducedEvents) });
+        }
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -65,8 +75,13 @@ class App extends Component {
   render() {
     const { events, locations } = this.state;
 
+    if (this.state.showWelcomeScreen === undefined) {
+      return <div className="App" />;
+    }
+
     return (
       <div className="app">
+
         <Navbar bg="dark" variant="dark">
           <Container>
             <Navbar.Brand>Meet</Navbar.Brand>
@@ -84,6 +99,11 @@ class App extends Component {
           </div>
           <EventList events={events} />
         </Container>
+
+        <WelcomeScreen 
+          showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => { getAccessToken() }} 
+        />
       </div>
     );
   }
