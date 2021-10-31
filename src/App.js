@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
-import WelcomeScreen from '.WelcomeScreen';
+import WelcomeScreen from './WelcomeScreen';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { WarningAlert } from './components/Alert';
 
