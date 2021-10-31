@@ -4,6 +4,11 @@
   height: 100%;
   top: 0;
   background: white;
+  text-align: center;
+}
+
+.WelcomeScreen > * {
+  margin-top: 2rem;
 }
 
 .login-button {
