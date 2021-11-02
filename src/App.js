@@ -7,6 +7,8 @@ import {
 // React-Bootstrap Components
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 // Custom Components
 import EventList from './components/EventList';
@@ -109,19 +111,23 @@ class App extends Component {
             <NumberOfEvents updateEvents={this.updateEvents} />
           </div>
 
-          <div className="data-vis-wrapper">
-            <EventGenre events={events} />
-            
-            <ResponsiveContainer height={400}>
-              <ScatterChart margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="category" dataKey="city" name="city" />
-                <YAxis type="number" dataKey="number" name="number of events" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={this.getData()} fill="#8884d8" />
-              </ScatterChart>
+          <Row>
+            <Col lg={6}>
+              <EventGenre events={events} />
+            </Col>
+
+            <Col lg={6}>
+              <ResponsiveContainer height={400}>
+                <ScatterChart margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="category" dataKey="city" name="city" />
+                  <YAxis type="number" dataKey="number" name="number of events" />
+                  <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                  <Scatter data={this.getData()} fill="#8884d8" />
+                </ScatterChart>
               </ResponsiveContainer>
-            </div>
+            </Col>
+          </Row>
 
           <EventList events={events} />
         </Container>
