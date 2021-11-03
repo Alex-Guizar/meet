@@ -9,11 +9,13 @@ const EventGenre = ({ events }) => {
 
   const getData = () => {
     const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
-    const data = genres.map((genre) => {
+    let data = genres.map((genre) => {
       const value = events.filter((event) => event.summary.split(' ').includes(genre)).length;
 
       return { name: genre, value };
     });
+
+    data = data.filter((data) => data.value);
 
     return data;
   }
