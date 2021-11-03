@@ -18,6 +18,7 @@ import WelcomeScreen from './WelcomeScreen';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { WarningAlert } from './components/Alert';
 import EventGenre from './components/EventGenre';
+import { mockData } from './mock-data';
 
 // Custom CSS
 import './nprogress.css';
@@ -38,7 +39,17 @@ class App extends Component {
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
-    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if (!window.location.href.startsWith('http://localhost')) {
+      this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    }
+
+    if (window.location.href.startsWith('http://localhost')) {
+      const reducedEvents = mockData.slice(0, this.state.numberOfEvents);
+      this.setState({
+        events: reducedEvents,
+        locations: extractLocations(reducedEvents)
+      });
+    }
 
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
