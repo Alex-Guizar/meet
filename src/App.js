@@ -104,7 +104,7 @@ class App extends Component {
     return (
       <div className="app">
 
-        <Navbar bg="dark" variant="dark">
+        <Navbar className="navbar-bg-site_blue navbar-text-pink">
           <Container>
             <Navbar.Brand>Meet</Navbar.Brand>
           </Container>

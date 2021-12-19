@@ -7,7 +7,7 @@
   text-align: center;
 }
 
-.WelcomeScreen > * {
+.WelcomeScreen > *:not(nav) {
   margin-top: 2rem;
 }
 

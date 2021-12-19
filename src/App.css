@@ -1,3 +1,11 @@
+.navbar-bg-site_blue {
+  background-color: #3D5387;
+}
+
+.navbar-text-pink {
+  color: #FF88A7;
+}
+
 .alert-inner {
   min-height: 48px;
 }
